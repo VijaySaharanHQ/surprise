@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Surprise For Tripti 💙</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    color:#fff;
+    overflow-x:hidden;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,105,180,.25), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(100,149,237,.25), transparent 30%),
+        linear-gradient(135deg,#080018,#17052d,#06152c);
+}
+
+/* Floating Background */
+.bg-heart{
+    position:fixed;
+    bottom:-50px;
+    font-size:20px;
+    opacity:.15;
+    pointer-events:none;
+    animation:floatUp linear infinite;
+    z-index:0;
+}
+
+@keyframes floatUp{
+    from{
+        transform:translateY(0) rotate(0deg);
+        opacity:0;
+    }
+    15%{opacity:.2;}
+    to{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+.container{
+    width:min(900px,92%);
+    margin:auto;
+    position:relative;
+    z-index:2;
+}
+
+.screen{
+    min-height:100vh;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:40px 0;
+}
+
+.screen.active{
+    display:flex;
+    animation:fadeIn .7s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.card{
+    width:100%;
+    max-width:760px;
+    padding:45px 30px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-radius:30px;
+    box-shadow:0 20px 70px rgba(0,0,0,.4);
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 15px;
+    border-radius:50px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.15);
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+h1{
+    font-size:clamp(38px,8vw,72px);
+    margin-bottom:18px;
+    background:linear-gradient(90deg,#fff,#ff9bd5,#a9c9ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+h2{
+    font-size:clamp(28px,5vw,45px);
+    margin-bottom:18px;
+}
+
+p{
+    color:#ddd;
+    font-size:17px;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.highlight{
+    color:#ff9bd5;
+    font-weight:bold;
+}
+
+button{
+    border:0;
+    padding:14px 25px;
+    border-radius:50px;
+    cursor:pointer;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    margin:7px;
+    background:linear-gradient(135deg,#ff4fa3,#8b5cf6);
+    box-shadow:0 8px 25px rgba(255,79,163,.25);
+    transition:.25s;
+}
+
+button:hover{
+    transform:translateY(-3px) scale(1.03);
+    box-shadow:0 12px 30px rgba(255,79,163,.4);
+}
+
+button.secondary{
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:none;
+}
+
+.progress{
+    width:100%;
+    height:8px;
+    background:rgba(255,255,255,.1);
+    border-radius:20px;
+    overflow:hidden;
+    margin:25px 0;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#ff4fa3,#8b5cf6,#5ee7df);
+    transition:width 1s ease;
+}
+
+/* Question */
+.question-number{
+    color:#ff9bd5;
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-top:20px;
+}
+
+.option{
+    padding:17px;
+    border-radius:18px;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.12);
+    cursor:pointer;
+    transition:.25s;
+}
+
+.option:hover{
+    background:rgba(255,105,180,.15);
+    transform:translateY(-2px);
+}
+
+.feedback{
+    min-height:35px;
+    margin-top:18px;
+    color:#ffb7df;
+    font-weight:bold;
+}
+
+/* Loading */
+.loader{
+    width:180px;
+    height:180px;
+    margin:30px auto;
+    border-radius:50%;
+    border:8px solid rgba(255,255,255,.1);
+    border-top-color:#ff65b5;
+    border-right-color:#8b5cf6;
+    animation:spin 1.2s linear infinite;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg);}
+}
+
+.loading-text{
+    font-size:20px;
+    color:#ffb8df;
+}
+
+/* Friendship Meter */
+.meter{
+    width:100%;
+    height:25px;
+    border-radius:30px;
+    background:rgba(255,255,255,.08);
+    overflow:hidden;
+    margin:25px 0 10px;
+}
+
+.meter-fill{
+    height:100%;
+    width:0%;
+    border-radius:30px;
+    background:linear-gradient(90deg,#ff4fa3,#a855f7,#60a5fa);
+    transition:width 2s ease;
+}
+
+.percent{
+    font-size:45px;
+    font-weight:bold;
+}
+
+/* Final */
+.final-message{
+    padding:30px 15px;
+    border-radius:25px;
+    background:rgba(255,255,255,.06);
+    margin-top:25px;
+}
+
+.final-message p{
+    font-size:18px;
+}
+
+.signature{
+    margin-top:25px;
+    color:#ff9bd5;
+    font-weight:bold;
+}
+
+.heart-big{
+    font-size:70px;
+    animation:heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.18);}
+}
+
+/* Photo prank */
+.photo-box{
+    margin:25px auto;
+    width:220px;
+    height:220px;
+    border-radius:25px;
+    border:2px dashed rgba(255,255,255,.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:10px;
+    background:rgba(255,255,255,.04);
+}
+
+.photo-icon{
+    font-size:55px;
+}
+
+/* Toast */
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:25px;
+    transform:translateX(-50%) translateY(100px);
+    background:#171329;
+    border:1px solid rgba(255,255,255,.15);
+    padding:14px 20px;
+    border-radius:50px;
+    z-index:100;
+    transition:.4s;
+    opacity:0;
+    box-shadow:0 10px 35px rgba(0,0,0,.4);
+}
+
+.toast.show{
+    transform:translateX(-50%) translateY(0);
+    opacity:1;
+}
+
+.confetti{
+    position:fixed;
+    top:-20px;
+    z-index:999;
+    pointer-events:none;
+    animation:confettiFall linear forwards;
+}
+
+@keyframes confettiFall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+
+.small{
+    font-size:13px;
+    color:#aaa;
+}
+
+@media(max-width:600px){
+    .card{
+        padding:35px 20px;
+    }
+
+    .options{
+        grid-template-columns:1fr;
+    }
+
+    button{
+        width:90%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Hearts -->
+<div id="backgroundHearts"></div>
+
+<!-- SCREEN 1 -->
+<section class="screen active" id="screen1">
+<div class="container">
+<div class="card">
+
+<div class="badge">🔐 PRIVATE SURPRISE</div>
+
+<div class="heart-big">💙</div>
+
+<h1>Hey Tripti...</h1>
+
+<p>
+Tumhare liye kuch banaya hai.<br>
+Lekin ek <span class="highlight">small warning</span> hai...
+</p>
+
+<p>
+Is surprise ko end tak dekhna padega. 👀
+</p>
+
+<button onclick="nextScreen(2)">
+Open The Surprise 😏
+</button>
+
+<p class="small">No cheating. No skipping. 😂</p>
+
+</div>
+</div>
+</section>
+
+
+<!-- SCREEN 2 -->
+<section class="screen" id="screen2">
+<div class="container">
+<div class="card">
+
+<div class="badge">ROUND 1 • CONFIRMATION</div>
+
+<h2>Wait... 🤨</h2>
+
+<p>
+Pehle confirm karna padega...
+<strong>kya tum Tripti Gupta ho?</strong>
+</p>
+
+<button onclick="correctIdentity()">YES, Obviously 😌</button>
+<button class="secondary" onclick="identityNo()">No 🤨</button>
+
+<div class="feedback" id="identityFeedback"></div>
+
+</div>
+</div>
+</section>
+
+
+<!-- SCREEN 3 -->
+<section class="screen" id="screen3">
+<div class="container">
+<div class="card">
+
+<div class="badge">ROUND 2 • IMPORTANT QUESTION</div>
+
+<h2>Ek Serious Sawal 😶</h2>
+
+<p>
+Agar koi friend tumhe bina reason pareshan kare...
+toh iska matlab kya hota hai? 😂
+</p>
+
+<div class="options">
+
+<div class="option" onclick="answer('friend')">
+🫶 Woh close friend hai
+</div>
+
+<div class="option" onclick="answer('enemy')">
+😤 Woh enemy hai
+</div>
+
+<div class="option" onclick="answer('nothing')">
+🤷 Kuch bhi nahi
+</div>
+
+<div class="option" onclick="answer('me')">
+😎 Obviously Vijay
+</div>
+
+</div>
+
+<div class="feedback" id="answerFeedback"></div>
+
+<button id="questionNext" style="display:none;" onclick="nextScreen(4)">
+Next 😏 →
+</button>
+
+</div>
+</div>
+</section>
+
+
+<!-- SCREEN 4 PHOTO PRANK -->
+<section class="screen" id="screen4">
+<div class="container">
+<div class="card">
+
+<div class="badge">🚨 SURPRISE VERIFICATION</div>
+
+<h2>One Last Requirement... 📸</h2>
+
+<p>
+Surprise unlock karne ke liye ek photo required hai.
+</p>
+
+<div class="photo-box">
+<div class="photo-icon">📸</div>
+<div>Photo Required</div>
+</div>
+
+<button onclick="photoYes()">
+Photo Dungi 😳
+</button>
+
+<button class="secondary" onclick="photoNo()">
+Bilkul Nahi 😤
+</button>
+
+<div class="feedback" id="photoFeedback"></div>
+
+</div>
+</div>
+</section>
+
+
+<!-- SCREEN 5 -->
+<section class="screen" id="screen5">
+<div class="container">
+<div class="card">
+
+<div class="badge">😂 GOTCHA!</div>
+
+<h2>Relax Tripti! 😂</h2>
+
+<p>
+Photo ki actually <span class="highlight">koi zarurat nahi hai.</span>
+</p>
+
+<p>
+Mujhe bas dekhna tha ki tum kitni jaldi
+<strong>“Bilkul Nahi”</strong> bolti ho. 😌
+</p>
+
+<div class="heart-big">😂</div>
+
+<button onclick="nextScreen(6)">
+Okay, Continue 💙
+</button>
+
+</div>
+</div>
+</section>
+
+
+<!-- SCREEN 6 QUESTIONS -->
+<section class="screen" id="screen6">
+<div class="container">
+<div class="card">
+
+<div class="badge">💙 FRIENDSHIP TEST</div>
+
+<div class="question-number" id="questionNumber">
+Question 1 / 4
+</div>
+
+<h2 id="questionText">
+Tumhare mood ko instantly kya better karta hai?
+</h2>
+
+<div class="options" id="questionOptions"></div>
+
+<div class="feedback" id="quizFeedback"></div>
+
+<div class="progress">
+<div class="progress-bar" id="quizProgress"></div>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- SCREEN 7 LOADING -->
+<section class="screen" id="screen7">
+<div class="container">
+<div class="card">
+
+<div class="badge">🔐 ANALYZING RESULTS</div>
+
+<h2>Calculating Friendship Level...</h2>
+
+<div class="loader">
+<span id="loadPercent">0%</span>
+</div>
+
+<div class="loading-text" id="loadingText">
+Checking memories...
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- SCREEN 8 METER -->
+<section class="screen" id="screen8">
+<div class="container">
+<div class="card">
+
+<div class="badge">💙 OFFICIAL RESULT</div>
+
+<h2>Friendship Level</h2>
+
+<div class="percent" id="friendshipPercent">0%</div>
+
+<div class="meter">
+<div class="meter-fill" id="meterFill"></div>
+</div>
+
+<p id="meterText">
+Calculating...
+</p>
+
+<button id="resultButton" style="display:none;" onclick="nextScreen(9)">
+See The Real Surprise 🎁
+</button>
+
+</div>
+</div>
+</section>
+
+
+<!-- FINAL -->
+<section class="screen" id="screen9">
+<div class="container">
+<div class="card">
+
+<div class="heart-big">💙</div>
+
+<div class="badge">✨ SURPRISE UNLOCKED ✨</div>
+
+<h1>Tripti Gupta</h1>
+
+<div class="final-message">
+
+<p>
+Kabhi-kabhi life mein kuch log bina kisi special reason ke
+<strong>special ban jaate hain.</strong>
+</p>
+
+<p>
+Na koi perfect friendship formula hota hai,
+na har din perfect hota hai...
+</p>
+
+<p>
+Lekin kuch conversations,
+kuch random jokes,
+kuch annoying moments 😤😂
+aur kuch simple memories...
+<strong>bahut important ban jaati hain.</strong>
+</p>
+
+<p>
+Bas isi liye ye chhota sa webpage banaya.
+Koi big reason nahi...
+<strong>bas ek smile ke liye. 😊</strong>
+</p>
+
+<p>
+Aur haan...
+<strong>photo maangne wala prank officially successful tha. 😂</strong>
+</p>
+
+</div>
+
+<div class="signature">
+Made with 💙 by Vijay
+</div>
+
+<br>
+
+<button onclick="celebrate()">
+One More Surprise 🎉
+</button>
+
+<p class="small">
+This page was made specially for you.
+</p>
+
+</div>
+</div>
+</section>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* ================================
+   TRIPTI SURPRISE WEBSITE
+   ================================ */
+
+let currentScreen = 1;
+let quizIndex = 0;
+let score = 0;
+
+
+/* Screen Navigation */
+function nextScreen(number){
+
+    document.querySelectorAll(".screen").forEach(screen=>{
+        screen.classList.remove("active");
+    });
+
+    const target = document.getElementById("screen"+number);
+
+    if(target){
+        target.classList.add("active");
+        currentScreen = number;
+        window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    if(number === 7){
+        startLoading();
+    }
+
+    if(number === 8){
+        startMeter();
+    }
+}
+
+
+/* Identity */
+function correctIdentity(){
+
+    document.getElementById("identityFeedback").innerHTML =
+    "Good. Identity confirmed. 😌💙";
+
+    setTimeout(()=>{
+        nextScreen(3);
+    },1200);
+}
+
+function identityNo(){
+
+    document.getElementById("identityFeedback").innerHTML =
+    "Hmm... suspicious. 🤨 Try again.";
+
+}
+
+
+/* First Question */
+function answer(type){
+
+    const feedback = document.getElementById("answerFeedback");
+
+    if(type === "friend"){
+        feedback.innerHTML =
+        "Correct! 😌 Close friends ko pareshan karna compulsory hota hai. 😂";
+        score += 25;
+    }
+
+    else if(type === "enemy"){
+        feedback.innerHTML =
+        "Wrong answer! 😭 Itna bhi serious mat ho.";
+    }
+
+    else if(type === "nothing"){
+        feedback.innerHTML =
+        "Interesting... but mujhe ye answer accept nahi hai. 😂";
+        score += 10;
+    }
+
+    else{
+        feedback.innerHTML =
+        "Aha! Naam khud aa gaya. Suspicious... 😎😂";
+        score += 20;
+    }
+
+    document.getElementById("questionNext").style.display="inline-block";
+}
+
+
+/* Photo Prank */
+function photoYes(){
+
+    const feedback = document.getElementById("photoFeedback");
+
+    feedback.innerHTML =
+    "WAIT... REALLY?! 😳 Camera activate karne hi wala tha... 😂";
+
+    setTimeout(()=>{
+        nextScreen(5);
+    },1800);
+}
+
+function photoNo(){
+
+    const feedback = document.getElementById("photoFeedback");
+
+    feedback.innerHTML =
+    "😂😂 Mujhe pata tha! Photo nahi deni.";
+
+    setTimeout(()=>{
+        nextScreen(5);
+    },1300);
+}
+
+
+/* Quiz */
+const questions = [
+
+{
+    q:"Tumhare mood ko instantly kya better karta hai?",
+    options:[
+        "Music 🎵",
+        "Talking 🗣️",
+        "Food 🍕",
+        "Sleep 😴"
+    ]
+},
+
+{
+    q:"Perfect friendship mein sabse important kya hai?",
+    options:[
+        "Trust 🤝",
+        "Fun 😂",
+        "Understanding 💙",
+        "All of these 😌"
+    ]
+},
+
+{
+    q:"Agar ek random trip mile toh?",
+    options:[
+        "Mountains 🏔️",
+        "Beach 🌊",
+        "City Tour 🌆",
+        "Stay Home 😂"
+    ]
+},
+
+{
+    q:"Friendship ko 3 words mein describe karo?",
+    options:[
+        "Crazy • Fun • Real 💙",
+        "Peace • Trust • Smile 😊",
+        "Drama • Drama • Drama 😂",
+        "Impossible to Explain ✨"
+    ]
+}
+
+];
+
+
+function loadQuestion(){
+
+    const question = questions[quizIndex];
+
+    document.getElementById("questionNumber").innerText =
+    `Question ${quizIndex+1} / ${questions.length}`;
+
+    document.getElementById("questionText").innerText =
+    question.q;
+
+    const optionsContainer =
+    document.getElementById("questionOptions");
+
+    optionsContainer.innerHTML="";
+
+    question.options.forEach((option,index)=>{
+
+        const div=document.createElement("div");
+
+        div.className="option";
+
+        div.innerText=option;
+
+        div.onclick=()=>selectQuiz(index);
+
+        optionsContainer.appendChild(div);
+
+    });
+
+    document.getElementById("quizProgress").style.width =
+    `${(quizIndex/questions.length)*100}%`;
+
+}
+
+
+function selectQuiz(index){
+
+    score += 10;
+
+    const feedback =
+    document.getElementById("quizFeedback");
+
+    const messages = [
+        "Interesting choice... 👀",
+        "Noted! 😌",
+        "Good answer! 💙",
+        "Okayyy... I see you. 😂"
+    ];
+
+    feedback.innerText =
+    messages[Math.floor(Math.random()*messages.length)];
+
+    setTimeout(()=>{
+
+        quizIndex++;
+
+        if(quizIndex < questions.length){
+
+            feedback.innerText="";
+            loadQuestion();
+
+        }else{
+
+            nextScreen(7);
+
+        }
+
+    },900);
+}
+
+
+/* Loading */
+function startLoading(){
+
+    let percent=0;
+
+    const loadPercent =
+    document.getElementById("loadPercent");
+
+    const loadingText =
+    document.getElementById("loadingText");
+
+    const texts=[
+        "Checking memories...",
+        "Analyzing friendship...",
+        "Finding funny moments...",
+        "Measuring patience...",
+        "Detecting teasing level...",
+        "Almost done...",
+        "Result ready! 💙"
+    ];
+
+    const interval=setInterval(()=>{
+
+        percent += Math.floor(Math.random()*12)+5;
+
+        if(percent>=100){
+
+            percent=100;
+            clearInterval(interval);
+
+            loadingText.innerText =
+            "Result ready! 💙";
+
+            setTimeout(()=>{
+                nextScreen(8);
+            },1000);
+
+        }else{
+
+            loadingText.innerText =
+            texts[Math.floor(percent/16)] || texts[0];
+
+        }
+
+        loadPercent.innerText=percent+"%";
+
+    },350);
+
+}
+
+
+/* Friendship Meter */
+function startMeter(){
+
+    setTimeout(()=>{
+
+        const finalScore=100;
+
+        document.getElementById("meterFill").style.width =
+        finalScore+"%";
+
+        let current=0;
+
+        const percentElement =
+        document.getElementById("friendshipPercent");
+
+        const counter=setInterval(()=>{
+
+            current+=2;
+
+            if(current>=finalScore){
+
+                current=finalScore;
+                clearInterval(counter);
+
+                document.getElementById("meterText").innerHTML =
+                "<strong>Too Special To Calculate. 💙</strong>";
+
+                document.getElementById("resultButton").style.display =
+                "inline-block";
+            }
+
+            percentElement.innerText=current+"%";
+
+        },30);
+
+    },400);
+}
+
+
+/* Celebration */
+function celebrate(){
+
+    const emojis=[
+        "💙","💖","✨","🎉","💫","🌸","😂","🥳","⭐"
+    ];
+
+    for(let i=0;i<90;i++){
+
+        const element=document.createElement("div");
+
+        element.className="confetti";
+
+        element.innerText=
+        emojis[Math.floor(Math.random()*emojis.length)];
+
+        element.style.left=
+        Math.random()*100+"vw";
+
+        element.style.fontSize=
+        (12+Math.random()*20)+"px";
+
+        element.style.animationDuration=
+        (2+Math.random()*3)+"s";
+
+        document.body.appendChild(element);
+
+        setTimeout(()=>{
+            element.remove();
+        },5500);
+    }
+
+    showToast(
+        "🎉 Surprise successfully delivered to Tripti! 💙"
+    );
+}
+
+
+/* Toast */
+function showToast(message){
+
+    const toast=document.getElementById("toast");
+
+    toast.innerText=message;
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },3000);
+}
+
+
+/* Background Floating Hearts */
+function createBackgroundHeart(){
+
+    const heart=document.createElement("div");
+
+    heart.className="bg-heart";
+
+    const icons=["💙","💖","✨","🌸","💫"];
+
+    heart.innerText=
+    icons[Math.floor(Math.random()*icons.length)];
+
+    heart.style.left=
+    Math.random()*100+"vw";
+
+    heart.style.fontSize=
+    (15+Math.random()*25)+"px";
+
+    heart.style.animationDuration=
+    (7+Math.random()*8)+"s";
+
+    document.getElementById("backgroundHearts")
+    .appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },16000);
+}
+
+setInterval(createBackgroundHeart,800);
+
+
+/* Start Quiz */
+loadQuestion();
+
+</script>
+
+</body>
+</html>
