@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#05050d">
-<title>TRIPTI // Something Special</title>
+<title>TRIPTI'S Surprise </title>
 
 <style>
 *{
@@ -14,1236 +13,2352 @@
 }
 
 :root{
-  --pink:#ff4fa3;
-  --purple:#8b5cf6;
-  --cyan:#55e7ff;
-  --white:#f8f7ff;
-  --muted:#9d9aad;
-  --glass:rgba(255,255,255,.055);
+  --bg:#050509;
+  --panel:rgba(255,255,255,.065);
+  --border:rgba(255,255,255,.13);
+  --text:#f7f7fb;
+  --muted:#9a9aaa;
+  --accent:#8b5cf6;
+  --accent2:#ec4899;
+  --cyan:#22d3ee;
+  --green:#34d399;
+  --danger:#fb7185;
 }
 
-html{scroll-behavior:smooth}
-
 body{
+  background:
+    radial-gradient(circle at 20% 20%,rgba(139,92,246,.13),transparent 30%),
+    radial-gradient(circle at 80% 70%,rgba(236,72,153,.10),transparent 30%),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   min-height:100vh;
   overflow-x:hidden;
-  color:var(--white);
-  background:#05050d;
-  font-family:Inter,Segoe UI,Arial,sans-serif;
 }
 
 button{
   font:inherit;
 }
 
-#stars,
-#particles{
+canvas#space{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:-3;
+}
+
+#aurora{
   position:fixed;
   inset:0;
   pointer-events:none;
-  overflow:hidden;
-}
-
-#stars{
+  z-index:-2;
   background:
-    radial-gradient(circle at 20% 20%,rgba(139,92,246,.18),transparent 25%),
-    radial-gradient(circle at 80% 75%,rgba(255,79,163,.14),transparent 28%);
-}
-
-.star{
-  position:absolute;
-  width:2px;
-  height:2px;
-  border-radius:50%;
-  background:white;
-  opacity:.5;
-  animation:twinkle 3s infinite alternate;
-}
-
-@keyframes twinkle{
-  from{opacity:.15}
-  to{opacity:.9}
-}
-
-.app{
-  position:relative;
-  z-index:2;
-  min-height:100vh;
+    radial-gradient(circle at 50% -10%,rgba(139,92,246,.16),transparent 35%);
 }
 
 .screen{
   display:none;
   min-height:100vh;
-  width:100%;
-  padding:30px 18px;
-  align-items:center;
-  justify-content:center;
+  padding:30px;
 }
 
 .screen.active{
   display:flex;
-  animation:screenIn .7s ease;
 }
 
-@keyframes screenIn{
-  from{
-    opacity:0;
-    transform:translateY(20px) scale(.98)
-  }
-  to{
-    opacity:1;
-    transform:none
-  }
+.center{
+  width:100%;
+  max-width:1100px;
+  margin:auto;
 }
 
-.wrap{
-  width:min(900px,100%);
-}
-
-.panel{
-  position:relative;
-  overflow:hidden;
-  padding:42px 30px;
-  border:1px solid rgba(255,255,255,.11);
-  border-radius:30px;
-  background:rgba(10,10,24,.72);
-  box-shadow:
-    0 30px 100px rgba(0,0,0,.55),
-    inset 0 1px rgba(255,255,255,.05);
+.glass{
+  background:var(--panel);
+  border:1px solid var(--border);
+  box-shadow:0 20px 80px rgba(0,0,0,.35);
   backdrop-filter:blur(20px);
-}
-
-.panel:before{
-  content:"";
-  position:absolute;
-  width:300px;
-  height:300px;
-  top:-180px;
-  right:-150px;
-  border-radius:50%;
-  background:rgba(255,79,163,.13);
-  filter:blur(40px);
-}
-
-.center{text-align:center}
-
-.kicker{
-  color:var(--cyan);
-  letter-spacing:4px;
-  text-transform:uppercase;
-  font-size:11px;
-  margin-bottom:20px;
-}
-
-h1{
-  font-size:clamp(45px,10vw,90px);
-  line-height:.95;
-  letter-spacing:-4px;
-  background:linear-gradient(100deg,#fff,#ff9bca,#a98cff,#75eaff);
-  -webkit-background-clip:text;
-  color:transparent;
-  margin-bottom:25px;
-}
-
-h2{
-  font-size:clamp(30px,6vw,54px);
-  margin-bottom:18px;
-}
-
-h3{
-  margin-bottom:10px;
-}
-
-p{
-  color:#c6c4d1;
-  line-height:1.75;
-  font-size:16px;
-  margin-bottom:20px;
-}
-
-.accent{
-  color:#ff86bd;
-  font-weight:700;
+  -webkit-backdrop-filter:blur(20px);
+  border-radius:28px;
 }
 
 .btn{
-  position:relative;
-  border:1px solid rgba(255,255,255,.13);
-  border-radius:999px;
-  padding:14px 24px;
-  margin:6px;
+  border:1px solid rgba(255,255,255,.15);
   color:white;
+  background:linear-gradient(135deg,rgba(139,92,246,.9),rgba(236,72,153,.85));
+  padding:13px 22px;
+  border-radius:14px;
   cursor:pointer;
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  box-shadow:0 10px 30px rgba(139,92,246,.2);
   transition:.25s;
+  font-weight:700;
+  box-shadow:0 8px 30px rgba(139,92,246,.2);
 }
 
 .btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 15px 40px rgba(255,79,163,.28);
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:0 12px 35px rgba(236,72,153,.25);
 }
 
-.btn.ghost{
-  background:rgba(255,255,255,.055);
-  box-shadow:none;
+.btn.secondary{
+  background:rgba(255,255,255,.07);
 }
 
-.mini{
-  color:#777487;
+.btn.danger{
+  background:rgba(251,113,133,.12);
+  border-color:rgba(251,113,133,.35);
+}
+
+.logo{
+  font-size:clamp(58px,12vw,150px);
+  font-weight:900;
+  letter-spacing:-.08em;
+  line-height:.9;
+  background:linear-gradient(90deg,#fff,#b8a3ff,#ff8ac5,#fff);
+  background-size:300% auto;
+  color:transparent;
+  background-clip:text;
+  -webkit-background-clip:text;
+  animation:shine 5s linear infinite;
+}
+
+@keyframes shine{
+  to{background-position:300% center}
+}
+
+.kicker{
+  color:var(--cyan);
+  letter-spacing:.25em;
+  text-transform:uppercase;
   font-size:12px;
-  margin-top:16px;
+  font-weight:800;
 }
 
-/* TERMINAL */
+.subtitle{
+  color:var(--muted);
+  margin:15px 0 30px;
+  font-size:16px;
+}
+
+.centerText{
+  text-align:center;
+}
+
+.introBox{
+  padding:50px;
+  text-align:center;
+}
+
+.type{
+  min-height:28px;
+  font-family:monospace;
+  color:#c4b5fd;
+}
+
+.hud{
+  position:fixed;
+  top:15px;
+  right:15px;
+  z-index:50;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  max-width:90vw;
+}
+
+.hud span{
+  background:rgba(0,0,0,.55);
+  border:1px solid rgba(255,255,255,.12);
+  padding:8px 11px;
+  border-radius:12px;
+  font:11px monospace;
+  color:#ddd;
+  backdrop-filter:blur(12px);
+}
+
+.progress{
+  height:8px;
+  background:rgba(255,255,255,.07);
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress i{
+  display:block;
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--cyan));
+  transition:width .5s;
+}
+
+.sectionTitle{
+  font-size:clamp(30px,5vw,52px);
+  margin-bottom:10px;
+}
+
+.sectionSub{
+  color:var(--muted);
+  margin-bottom:25px;
+}
 
 .terminal{
-  text-align:left;
-  background:#030308;
-  border:1px solid #22222e;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
-  margin:25px 0;
+  padding:25px;
+  background:#020204;
+  border:1px solid #222;
+  border-radius:20px;
+  font-family:"Courier New",monospace;
+  color:#b8ffcf;
+  min-height:300px;
+  box-shadow:inset 0 0 50px rgba(52,211,153,.04);
 }
 
-.term-head{
-  padding:11px 15px;
-  border-bottom:1px solid #1c1c28;
-  color:#686879;
-  font-size:12px;
+.termLine{
+  margin:7px 0;
 }
 
-.dots{
-  display:inline-flex;
-  gap:5px;
-  margin-right:10px;
-}
+.green{color:#34d399}
+.purple{color:#c4b5fd}
+.cyan{color:#67e8f9}
+.pink{color:#f9a8d4}
+.red{color:#fb7185}
 
-.dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#333;
-}
-
-.term-body{
-  min-height:220px;
-  padding:20px;
-  color:#7cffc4;
-  font:14px/2 Consolas,monospace;
-  white-space:pre-wrap;
-}
-
-.cursor{
-  display:inline-block;
-  width:7px;
-  height:15px;
-  background:#7cffc4;
-  animation:blink .8s infinite;
-}
-
-@keyframes blink{
-  50%{opacity:0}
-}
-
-/* CLUES */
-
-.clues{
+.grid{
   display:grid;
+  gap:18px;
+}
+
+.grid3{
   grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  margin:25px 0;
+}
+
+.grid2{
+  grid-template-columns:repeat(2,1fr);
+}
+
+@media(max-width:750px){
+  .grid3,.grid2{
+    grid-template-columns:1fr;
+  }
+  .screen{
+    padding:18px;
+  }
+  .introBox{
+    padding:30px 20px;
+  }
+}
+
+.card{
+  padding:25px;
+  border:1px solid var(--border);
+  border-radius:22px;
+  background:rgba(255,255,255,.045);
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(139,92,246,.45);
+}
+
+.card h3{
+  margin-bottom:10px;
+}
+
+.card p{
+  color:var(--muted);
+  line-height:1.6;
 }
 
 .clue{
-  min-height:170px;
-  padding:24px 18px;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:20px;
-  background:rgba(255,255,255,.035);
   cursor:pointer;
-  transition:.3s;
-}
-
-.clue:hover{
-  transform:translateY(-6px);
-  border-color:rgba(255,79,163,.4);
-}
-
-.clue .number{
-  color:#7b748a;
-  font:12px monospace;
+  min-height:180px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
 
 .clue .secret{
   display:none;
-  margin-top:20px;
-  color:#ff9acb;
-  line-height:1.6;
+  color:#ddd;
+  margin-top:15px;
 }
 
 .clue.open .secret{
   display:block;
-  animation:fadeIn .4s;
-}
-
-.clue.open .cover{
-  display:none;
-}
-
-@keyframes fadeIn{
-  from{opacity:0}
-  to{opacity:1}
-}
-
-/* DOORS */
-
-.doors{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin:30px 0;
 }
 
 .door{
-  min-height:230px;
+  cursor:pointer;
+  min-height:240px;
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:24px;
-  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));
-  cursor:pointer;
-  transition:.35s;
+  text-align:center;
 }
 
-.door:hover{
-  transform:translateY(-8px) rotateX(4deg);
-  border-color:#8b5cf6;
-  box-shadow:0 20px 50px rgba(139,92,246,.16);
-}
-
-.door-icon{
-  font-size:55px;
+.doorIcon{
+  font-size:60px;
   margin-bottom:15px;
 }
 
-/* PRANK */
+.stat{
+  margin:18px 0;
+}
 
-.prank-zone{
-  height:220px;
-  position:relative;
-  border:1px dashed rgba(255,255,255,.15);
+.statTop{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:7px;
+  font-size:13px;
+}
+
+.statBar{
+  height:10px;
+  background:rgba(255,255,255,.07);
   border-radius:20px;
-  margin:25px 0;
   overflow:hidden;
 }
 
-#escapeBtn{
+.statBar i{
+  display:block;
+  height:100%;
+  width:0;
+  transition:1s;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+
+.mission{
+  position:relative;
+  padding:20px;
+  min-height:155px;
+}
+
+.mission.done{
+  border-color:rgba(52,211,153,.45);
+  background:rgba(52,211,153,.05);
+}
+
+.mission.done::after{
+  content:"✓";
   position:absolute;
-  left:50%;
-  top:55%;
-  transform:translate(-50%,-50%);
-}
-
-/* FRIENDSHIP */
-
-.algorithm{
-  text-align:left;
-  background:#020207;
-  border-radius:20px;
-  padding:22px;
-  font:14px/2 Consolas,monospace;
-  color:#8efbd0;
-  border:1px solid #1d2930;
-}
-
-.line{
-  opacity:0;
-  animation:lineIn .5s forwards;
-}
-
-@keyframes lineIn{
-  to{opacity:1}
-}
-
-.result{
-  margin-top:25px;
-  padding:25px;
-  border-radius:20px;
-  text-align:center;
-  background:linear-gradient(135deg,rgba(255,79,163,.12),rgba(139,92,246,.12));
-  border:1px solid rgba(255,255,255,.09);
-}
-
-.bigResult{
-  font-size:clamp(38px,8vw,70px);
+  top:15px;
+  right:18px;
+  color:var(--green);
+  font-size:22px;
   font-weight:900;
-  margin:8px 0;
 }
 
-/* EASTER */
+.missionNum{
+  color:#8b5cf6;
+  font:12px monospace;
+  margin-bottom:10px;
+}
 
-.code-box{
-  padding:22px;
-  border-radius:18px;
-  background:#030308;
-  color:#d2ccff;
-  font:14px/1.8 Consolas,monospace;
-  text-align:left;
-  border:1px solid #20202d;
+.codeInput{
+  width:100%;
+  padding:15px;
+  background:#050507;
+  color:white;
+  border:1px solid var(--border);
+  border-radius:12px;
+  outline:none;
+  text-align:center;
+  font-size:20px;
+  letter-spacing:.2em;
+}
+
+.choiceRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.choice{
+  padding:11px 15px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:rgba(255,255,255,.05);
+  color:white;
   cursor:pointer;
 }
 
-.hidden{
-  display:none;
+.choice:hover{
+  border-color:var(--accent);
 }
 
-/* FINAL */
-
-.final{
-  padding:50px 25px;
+.chat{
+  max-width:650px;
+  margin:auto;
+  padding:25px;
 }
 
-.final-heart{
-  font-size:75px;
-  animation:heartbeat 1.3s infinite;
-  margin-bottom:15px;
+.msg{
+  max-width:80%;
+  padding:12px 15px;
+  margin:10px 0;
+  border-radius:17px;
+  line-height:1.5;
 }
 
-@keyframes heartbeat{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.15)}
+.msg.vijay{
+  background:rgba(139,92,246,.2);
+  margin-left:auto;
+  border-bottom-right-radius:4px;
 }
 
-.final-card{
-  margin-top:25px;
-  padding:28px;
-  border-radius:24px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
+.msg.tripti{
+  background:rgba(255,255,255,.08);
+  border-bottom-left-radius:4px;
 }
 
-.signature{
-  color:#ff86bd;
-  margin-top:30px;
-  font-weight:700;
+.msg small{
+  display:block;
+  color:#888;
+  font-size:9px;
+  margin-bottom:3px;
 }
 
-/* CONFETTI */
-
-.confetti{
-  position:fixed;
-  top:-20px;
-  z-index:999;
-  pointer-events:none;
-  animation:fall linear forwards;
+.map{
+  position:relative;
+  padding:35px 15px;
 }
 
-@keyframes fall{
-  to{
-    transform:translateY(110vh) rotate(720deg);
+.mapLine{
+  position:absolute;
+  top:76px;
+  left:8%;
+  right:8%;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#8b5cf6,#ec4899,transparent);
+}
+
+.nodes{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  position:relative;
+  z-index:2;
+}
+
+.node{
+  text-align:center;
+  width:110px;
+  cursor:pointer;
+}
+
+.nodeCircle{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  margin:auto auto 12px;
+  display:grid;
+  place-items:center;
+  background:#09090d;
+  border:2px solid #7c3aed;
+  box-shadow:0 0 25px rgba(139,92,246,.25);
+}
+
+.node:hover .nodeCircle{
+  transform:scale(1.1);
+}
+
+.node span{
+  font-size:11px;
+  color:#aaa;
+}
+
+@media(max-width:650px){
+  .map{
+    overflow-x:auto;
+  }
+  .nodes{
+    width:700px;
+  }
+  .mapLine{
+    width:650px;
+    right:auto;
   }
 }
 
-.toast{
+#heartGame{
+  position:relative;
+  height:430px;
+  overflow:hidden;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 50% 50%,rgba(139,92,246,.12),transparent 55%),
+    #030306;
+  border:1px solid var(--border);
+}
+
+.heart{
+  position:absolute;
+  font-size:30px;
+  cursor:pointer;
+  user-select:none;
+  animation:floatHeart 3s linear forwards;
+}
+
+@keyframes floatHeart{
+  from{transform:translateY(40px) rotate(0)}
+  to{transform:translateY(-500px) rotate(360deg)}
+}
+
+.gameInfo{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:12px;
+  color:#bbb;
+  font:13px monospace;
+}
+
+.memory{
+  min-height:170px;
+  cursor:pointer;
+  perspective:800px;
+}
+
+.memoryInner{
+  width:100%;
+  height:100%;
+  min-height:170px;
+  position:relative;
+  transition:.5s;
+  transform-style:preserve-3d;
+}
+
+.memory.flipped .memoryInner{
+  transform:rotateY(180deg);
+}
+
+.memoryFace{
+  position:absolute;
+  inset:0;
+  backface-visibility:hidden;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:20px;
+  border-radius:20px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.05);
+}
+
+.memoryBack{
+  transform:rotateY(180deg);
+  background:rgba(139,92,246,.1);
+}
+
+.achievement{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.badge{
+  width:55px;
+  height:55px;
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+  font-size:25px;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border);
+}
+
+.achievement.locked{
+  opacity:.35;
+}
+
+.achievement p{
+  color:#999;
+  font-size:12px;
+}
+
+.noPhoto{
+  text-align:center;
+  padding:40px;
+}
+
+.avatar{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  margin:20px auto;
+  display:grid;
+  place-items:center;
+  font-size:55px;
+  font-weight:900;
+  background:
+    radial-gradient(circle at 35% 30%,#fbcfe8,transparent 10%),
+    linear-gradient(135deg,#7c3aed,#ec4899);
+  box-shadow:0 0 80px rgba(236,72,153,.25);
+}
+
+.error{
+  font:13px monospace;
+  color:#fb7185;
+  background:rgba(251,113,133,.06);
+  border:1px solid rgba(251,113,133,.25);
+  padding:15px;
+  border-radius:12px;
+  text-align:left;
+  max-width:500px;
+  margin:20px auto;
+}
+
+#toast{
   position:fixed;
   left:50%;
   bottom:25px;
-  transform:translate(-50%,120px);
+  transform:translate(-50%,30px);
   opacity:0;
-  z-index:1000;
-  padding:13px 20px;
-  border-radius:999px;
-  background:#151420;
-  border:1px solid rgba(255,255,255,.12);
-  transition:.35s;
+  pointer-events:none;
+  z-index:100;
+  background:rgba(10,10,15,.9);
+  border:1px solid var(--border);
+  padding:13px 18px;
+  border-radius:14px;
+  backdrop-filter:blur(15px);
+  transition:.3s;
+  font-size:13px;
 }
 
-.toast.show{
-  transform:translate(-50%,0);
+#toast.show{
   opacity:1;
+  transform:translate(-50%,0);
 }
 
-/* RESPONSIVE */
-
-@media(max-width:700px){
-
-  .panel{
-    padding:34px 18px;
-    border-radius:24px;
-  }
-
-  .clues,
-  .doors{
-    grid-template-columns:1fr;
-  }
-
-  .clue{
-    min-height:120px;
-  }
-
-  h1{
-    letter-spacing:-2px;
-  }
-
-  .btn{
-    width:90%;
-  }
+.final{
+  text-align:center;
 }
+
+.final h1{
+  font-size:clamp(40px,9vw,100px);
+  margin:20px 0;
+}
+
+.finalQuote{
+  max-width:700px;
+  margin:25px auto;
+  padding:25px;
+  border-left:3px solid #ec4899;
+  background:rgba(255,255,255,.04);
+  text-align:left;
+  line-height:1.8;
+  color:#ccc;
+}
+
+.infinity{
+  font-size:90px;
+  background:linear-gradient(90deg,#8b5cf6,#ec4899,#22d3ee);
+  color:transparent;
+  background-clip:text;
+  -webkit-background-clip:text;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.footer{
+  text-align:center;
+  color:#555;
+  font-size:11px;
+  padding:30px 0;
+}
+
+.sound{
+  position:fixed;
+  left:15px;
+  top:15px;
+  z-index:60;
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(0,0,0,.5);
+  color:white;
+  cursor:pointer;
+}
+
+.theme{
+  position:fixed;
+  left:65px;
+  top:15px;
+  z-index:60;
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(0,0,0,.5);
+  color:white;
+  cursor:pointer;
+}
+
+.light body{}
 </style>
 </head>
 
 <body>
 
-<div id="stars"></div>
-<div id="particles"></div>
+<canvas id="space"></canvas>
+<div id="aurora"></div>
 
-<div class="app">
+<button class="sound" id="soundBtn" onclick="toggleSound()">🔇</button>
+<button class="theme" onclick="toggleTheme()">☼</button>
 
-<!-- ===================== 01 INTRO ===================== -->
+<div class="hud hidden" id="hud">
+  <span>TRIPTI OS</span>
+  <span>MISSIONS <b id="hudMission">0/10</b></span>
+  <span>SECRETS <b id="hudSecret">0/5</b></span>
+  <span>SCORE <b id="hudScore">000</b></span>
+  <span>ACCESS <b id="hudAccess">0%</b></span>
+</div>
+
+
+<!-- SCREEN 1 -->
 
 <section class="screen active" id="s1">
-<div class="wrap">
-<div class="panel center">
+  <div class="center introBox glass">
+    <div class="kicker">PRIVATE DIGITAL EXPERIENCE</div>
 
-<div class="kicker">Private Digital Experience</div>
+    <div class="logo">TRIPTI</div>
 
-<h1>TRIPTI</h1>
+    <p class="subtitle">
+      A website that was supposed to be simple...
+      <br>
+      but someone made a terrible mistake.
+    </p>
 
-<p>
-Someone created something specifically for you.
-</p>
+    <div class="type" id="introType"></div>
 
-<p>
-But before we continue...
-<br>
-<strong class="accent">access needs to be verified.</strong>
-</p>
+    <br>
 
-<button class="btn" onclick="go(2)">
-INITIALIZE →
-</button>
+    <button class="btn" onclick="startExperience()">
+      INITIALIZE EXPERIENCE →
+    </button>
 
-<div class="mini">
-System ID: TG-1809 • Status: Waiting
-</div>
-
-</div>
-</div>
+    <p style="margin-top:18px;color:#555;font-size:11px">
+      No photo required • Best experienced with sound
+    </p>
+  </div>
 </section>
 
 
-<!-- ===================== 02 TERMINAL ===================== -->
+<!-- SCREEN 2 -->
 
 <section class="screen" id="s2">
-<div class="wrap">
-<div class="panel">
+  <div class="center">
+    <div class="kicker">SYSTEM BOOT</div>
+    <h1 class="sectionTitle">TRIPTI OS</h1>
+    <p class="sectionSub">Initializing private digital experience...</p>
 
-<div class="kicker">System Initialization</div>
+    <div class="terminal glass" id="terminal"></div>
 
-<h2>Something is loading...</h2>
+    <br>
 
-<div class="terminal">
-
-<div class="term-head">
-<span class="dots">
-<span class="dot"></span>
-<span class="dot"></span>
-<span class="dot"></span>
-</span>
-TRIPTI_SYSTEM.exe
-</div>
-
-<div class="term-body" id="terminalText">
-<span class="cursor"></span>
-</div>
-
-</div>
-
-<div class="center">
-<button class="btn" id="terminalBtn" style="display:none" onclick="go(3)">
-Continue →
-</button>
-</div>
-
-</div>
-</div>
+    <div class="centerText">
+      <button class="btn hidden" id="terminalNext" onclick="go(3)">
+        CONTINUE →
+      </button>
+    </div>
+  </div>
 </section>
 
 
-<!-- ===================== 03 CLUES ===================== -->
+<!-- SCREEN 3 -->
 
 <section class="screen" id="s3">
-<div class="wrap">
-<div class="panel center">
+  <div class="center">
+    <div class="kicker">MISSION 01</div>
+    <h1 class="sectionTitle">Three Clues</h1>
+    <p class="sectionSub">Tap the clues. Something is hidden inside.</p>
 
-<div class="kicker">Investigation 01</div>
+    <div class="grid grid3">
 
-<h2>Three Clues 🕵️</h2>
+      <div class="card clue" onclick="openClue(this,1)">
+        <div>
+          <div class="kicker">CLUE #01</div>
+          <h3>📷 Photo Database</h3>
+        </div>
+        <p class="secret">
+          Status: <b class="red">404 — PHOTO NOT FOUND</b><br><br>
+          Subject refused to provide one.
+        </p>
+      </div>
 
-<p>
-Tap each card. There may be something hidden inside.
-</p>
+      <div class="card clue" onclick="openClue(this,2)">
+        <div>
+          <div class="kicker">CLUE #02</div>
+          <h3>💬 Famous Statement</h3>
+        </div>
+        <p class="secret">
+          “Ye toh simple hota hai... koi bhi kar leta.”
+          <br><br>
+          System response: <b>Challenge accepted.</b>
+        </p>
+      </div>
 
-<div class="clues">
+      <div class="card clue" onclick="openClue(this,3)">
+        <div>
+          <div class="kicker">CLUE #03</div>
+          <h3>⚠️ Difficulty</h3>
+        </div>
+        <p class="secret">
+          Previous version detected as:
+          <b class="red">TOO SIMPLE.</b>
+          <br><br>
+          Version 2 was immediately rejected.
+        </p>
+      </div>
 
-<div class="clue" onclick="openClue(this)">
-<div class="number">CLUE_01</div>
-<div class="cover">
-<h3>?</h3>
-<p>Something was refused.</p>
-</div>
-<div class="secret">
-📸 A photo was requested.<br><br>
-The answer was basically:
-<strong>NOPE. 😂</strong>
-</div>
-</div>
+    </div>
 
-<div class="clue" onclick="openClue(this)">
-<div class="number">CLUE_02</div>
-<div class="cover">
-<h3>?</h3>
-<p>Someone complained.</p>
-</div>
-<div class="secret">
-Apparently this whole thing was
-<strong>“too simple.” 😭</strong>
-</div>
-</div>
+    <br>
 
-<div class="clue" onclick="openClue(this)">
-<div class="number">CLUE_03</div>
-<div class="cover">
-<h3>?</h3>
-<p>So something changed.</p>
-</div>
-<div class="secret">
-The challenge was accepted.
-<br><br>
-<strong>Version 2 activated. 😎</strong>
-</div>
-</div>
-
-</div>
-
-<button class="btn" onclick="go(4)">
-Open The Next Mystery →
-</button>
-
-</div>
-</div>
+    <div class="centerText">
+      <button class="btn hidden" id="clueNext" onclick="completeMission(1);go(4)">
+        UNLOCK NEXT LEVEL →
+      </button>
+    </div>
+  </div>
 </section>
 
 
-<!-- ===================== 04 DOORS ===================== -->
+<!-- SCREEN 4 -->
 
 <section class="screen" id="s4">
-<div class="wrap">
-<div class="panel center">
+  <div class="center">
+    <div class="kicker">MISSION 02</div>
+    <h1 class="sectionTitle">Choose Your Door</h1>
+    <p class="sectionSub">Only one path is definitely not suspicious.</p>
 
-<div class="kicker">Choose Carefully</div>
+    <div class="grid grid3">
 
-<h2>Three Doors 🚪</h2>
+      <div class="card door" onclick="door(1)">
+        <div class="doorIcon">🌸</div>
+        <h3>THE SWEET DOOR</h3>
+        <p>Looks innocent.</p>
+      </div>
 
-<p>
-Only one thing is guaranteed:
-<br>
-<strong>none of these doors are normal.</strong>
-</p>
+      <div class="card door" onclick="door(2)">
+        <div class="doorIcon">🌀</div>
+        <h3>THE WEIRD DOOR</h3>
+        <p>Probably a bad idea.</p>
+      </div>
 
-<div class="doors">
+      <div class="card door" onclick="door(3)">
+        <div class="doorIcon">🔐</div>
+        <h3>THE HIDDEN DOOR</h3>
+        <p>Why is this one locked?</p>
+      </div>
 
-<div class="door" onclick="door(1)">
-<div class="door-icon">🌸</div>
-<strong>DOOR 01</strong>
-<small>Something Sweet</small>
-</div>
+    </div>
 
-<div class="door" onclick="door(2)">
-<div class="door-icon">😂</div>
-<strong>DOOR 02</strong>
-<small>Something Weird</small>
-</div>
+    <p id="doorResult" class="centerText" style="margin-top:25px;color:#aaa"></p>
 
-<div class="door" onclick="door(3)">
-<div class="door-icon">🔐</div>
-<strong>DOOR 03</strong>
-<small>Something Hidden</small>
-</div>
-
-</div>
-
-<div id="doorMessage" class="result" style="display:none"></div>
-
-<button class="btn" id="doorNext" style="display:none" onclick="go(5)">
-Continue →
-</button>
-
-</div>
-</div>
+    <div class="centerText">
+      <button class="btn hidden" id="doorNext" onclick="completeMission(2);go(5)">
+        ENTER →
+      </button>
+    </div>
+  </div>
 </section>
 
 
-<!-- ===================== 05 PRANK ===================== -->
+<!-- SCREEN 5 -->
 
 <section class="screen" id="s5">
-<div class="wrap">
-<div class="panel center">
+  <div class="center centerText">
+    <div class="kicker">MISSION 03</div>
+    <h1 class="sectionTitle">One Simple Question</h1>
 
-<div class="kicker">Important Decision</div>
+    <div class="glass" style="padding:50px 25px">
+      <h2>Do you want to leave?</h2>
+      <p class="sectionSub">
+        Choose carefully. The system has trust issues.
+      </p>
 
-<h2>Do You Want To Leave? 👀</h2>
+      <div style="position:relative;height:100px">
+        <button class="btn danger" id="escapeBtn">
+          YES, LET ME LEAVE
+        </button>
 
-<p>
-You have come this far.
-<br>
-Surely you're not going to leave now...
-</p>
+        <button class="btn" onclick="stayHere()" style="margin-left:10px">
+          I'LL STAY 😎
+        </button>
+      </div>
 
-<div class="prank-zone" id="prankZone">
-
-<button class="btn" onclick="go(6)">
-NO, I'LL STAY 💙
-</button>
-
-<button class="btn ghost" id="escapeBtn">
-YES, LET ME LEAVE
-</button>
-
-</div>
-
-<p class="mini">
-Hint: The second button is slightly... suspicious.
-</p>
-
-</div>
-</div>
+      <p id="escapeText" style="color:#888"></p>
+    </div>
+  </div>
 </section>
 
 
-<!-- ===================== 06 ALGORITHM ===================== -->
+<!-- SCREEN 6 -->
 
 <section class="screen" id="s6">
-<div class="wrap">
-<div class="panel">
+  <div class="center">
+    <div class="kicker">MISSION 04</div>
+    <h1 class="sectionTitle">Friendship.exe</h1>
+    <p class="sectionSub">
+      Running a completely fictional and scientifically questionable friendship algorithm.
+    </p>
 
-<div class="kicker">Friendship Analysis</div>
+    <div class="glass" style="padding:30px">
 
-<h2>Running Friendship.exe 🤖</h2>
+      <div class="stat">
+        <div class="statTop">
+          <span>Random Conversations</span>
+          <b>97%</b>
+        </div>
+        <div class="statBar"><i style="width:97%"></i></div>
+      </div>
 
-<div class="algorithm" id="algorithm"></div>
+      <div class="stat">
+        <div class="statTop">
+          <span>Fun</span>
+          <b>94%</b>
+        </div>
+        <div class="statBar"><i style="width:94%"></i></div>
+      </div>
 
-<div class="result hidden" id="algorithmResult">
+      <div class="stat">
+        <div class="statTop">
+          <span>Annoyance</span>
+          <b>89%</b>
+        </div>
+        <div class="statBar"><i style="width:89%"></i></div>
+      </div>
 
-<div class="kicker">FINAL CALCULATION</div>
+      <div class="stat">
+        <div class="statTop">
+          <span>Memories</span>
+          <b>∞%</b>
+        </div>
+        <div class="statBar"><i style="width:100%"></i></div>
+      </div>
 
-<div class="bigResult">∞%</div>
+      <div class="centerText">
+        <div class="infinity">∞%</div>
+        <p style="color:#999">
+          Result cannot be calculated using normal mathematics.
+        </p>
+      </div>
 
-<p>
-<strong>TOO SPECIAL TO MEASURE.</strong>
-</p>
+    </div>
 
-<p>
-The calculator officially gave up. 😂
-</p>
+    <br>
 
-</div>
-
-<div class="center">
-<button class="btn" id="algoNext" style="display:none" onclick="go(7)">
-Continue →
-</button>
-</div>
-
-</div>
-</div>
+    <div class="centerText">
+      <button class="btn" onclick="completeMission(4);go(7)">
+        ACCEPT RESULT →
+      </button>
+    </div>
+  </div>
 </section>
 
 
-<!-- ===================== 07 EASTER EGG ===================== -->
+<!-- SCREEN 7 -->
 
 <section class="screen" id="s7">
-<div class="wrap">
-<div class="panel center">
+  <div class="center">
+    <div class="kicker">MISSION 05</div>
+    <h1 class="sectionTitle">Secret Access</h1>
+    <p class="sectionSub">
+      There is a hidden code. Hint: her name knows the answer.
+    </p>
 
-<div class="kicker">Hidden Layer</div>
+    <div class="glass" style="max-width:500px;margin:auto;padding:30px">
+      <input
+        id="codeInput"
+        class="codeInput"
+        maxlength="20"
+        placeholder="ENTER CODE"
+        autocomplete="off"
+      >
 
-<h2>There Is One More Thing... 👀</h2>
+      <div class="choiceRow">
+        <button class="btn" onclick="checkCode()">VERIFY CODE</button>
+        <button class="btn secondary" onclick="showHint()">HINT</button>
+      </div>
 
-<p>
-Most people would stop here.
-<br>
-But you are already inside the system.
-</p>
+      <p id="codeMessage" class="centerText" style="margin-top:20px;color:#999"></p>
+    </div>
 
-<div class="code-box" onclick="activateEaster()">
-&gt; click_here_to_execute_secret();<br>
-&gt; status: <span id="eggStatus">LOCKED</span>
-</div>
+    <br>
 
-<div id="eggMessage" class="result hidden">
-
-<h3>🥚 EASTER EGG FOUND</h3>
-
-<p>
-You discovered the hidden message.
-</p>
-
-<strong class="accent">
-“Some surprises are not about what you receive,
-but about the effort someone put into making you smile.”
-</strong>
-
-</div>
-
-<br>
-
-<button class="btn" id="eggNext" style="display:none" onclick="go(8)">
-Final Access →
-</button>
-
-</div>
-</div>
+    <div class="centerText">
+      <button class="btn hidden" id="codeNext" onclick="completeMission(5);go(8)">
+        ACCESS GRANTED →
+      </button>
+    </div>
+  </div>
 </section>
 
 
-<!-- ===================== 08 FINAL ===================== -->
+<!-- SCREEN 8 -->
 
 <section class="screen" id="s8">
-<div class="wrap">
-<div class="panel center final">
+  <div class="center">
+    <div class="kicker">MISSION 06</div>
+    <h1 class="sectionTitle">No-Photo Mode</h1>
 
-<div class="final-heart">💙</div>
+    <div class="glass noPhoto">
 
-<div class="kicker">ACCESS GRANTED</div>
+      <div class="error">
+        GET /tripti/photo<br>
+        HTTP/1.1 404 NOT FOUND<br><br>
+        Reason: Subject refused to cooperate 😂
+      </div>
 
-<h1>Tripti Gupta</h1>
+      <div class="avatar">TG</div>
 
-<div class="final-card">
+      <h2>TRIPTI GUPTA</h2>
 
-<p>
-Okay...
-<strong>final reveal.</strong>
-</p>
+      <p class="sectionSub">
+        Photo dependency removed successfully.
+        <br>
+        Activating personality-independent visual mode.
+      </p>
 
-<p>
-I could have made a normal webpage.
-<br>
-A few buttons.
-<br>
-A few animations.
-<br>
-A photo.
-<br>
-Done.
-</p>
+      <button class="btn" onclick="completeMission(6);go(9)">
+        ACTIVATE NO-PHOTO MODE →
+      </button>
 
-<p>
-But then you said:
-</p>
-
-<h2 class="accent">
-“Ye toh simple hai,
-koi bhi bana lega.”
-</h2>
-
-<p>
-So...
-</p>
-
-<h2>Challenge Accepted. 😎</h2>
-
-<p>
-No photo required.
-<br>
-No complicated reason.
-<br><br>
-Just a little effort,
-a little creativity,
-and one simple goal:
-</p>
-
-<h2 class="accent">
-Make Tripti Smile. 😊
-</h2>
-
-</div>
-
-<div class="signature">
-Made specially for Tripti 💙<br>
-<span>— Vijay</span>
-</div>
-
-<br>
-
-<button class="btn" onclick="celebrate()">
-🎉 One Last Surprise
-</button>
-
-<p class="mini">
-End of experience • Beginning of another memory
-</p>
-
-</div>
-</div>
+    </div>
+  </div>
 </section>
 
-</div>
 
-<div class="toast" id="toast"></div>
+<!-- SCREEN 9 -->
+
+<section class="screen" id="s9">
+  <div class="center">
+    <div class="kicker">MISSION 07</div>
+    <h1 class="sectionTitle">Catch The Hearts</h1>
+    <p class="sectionSub">
+      Catch <b>10 hearts</b> before the timer runs out.
+    </p>
+
+    <div class="gameInfo">
+      <span>HEARTS: <b id="heartScore">0</b>/10</span>
+      <span>TIME: <b id="heartTime">20</b>s</span>
+    </div>
+
+    <div id="heartGame"></div>
+
+    <br>
+
+    <div class="centerText">
+      <button class="btn" id="gameStart" onclick="startHeartGame()">
+        START GAME
+      </button>
+    </div>
+
+    <p id="gameResult" class="centerText" style="margin-top:15px;color:#999"></p>
+
+    <button class="btn hidden" id="gameNext" onclick="completeMission(7);go(10)">
+      CONTINUE →
+    </button>
+  </div>
+</section>
+
+
+<!-- SCREEN 10 -->
+
+<section class="screen" id="s10">
+  <div class="center">
+    <div class="kicker">MISSION 08</div>
+    <h1 class="sectionTitle">Memory Vault</h1>
+    <p class="sectionSub">
+      No photos. Just moments.
+    </p>
+
+    <div class="grid grid2">
+
+      <div class="memory" onclick="flipMemory(this)">
+        <div class="memoryInner">
+          <div class="memoryFace">🔒<br>MEMORY 01</div>
+          <div class="memoryFace memoryBack">
+            Random talks that somehow became important.
+          </div>
+        </div>
+      </div>
+
+      <div class="memory" onclick="flipMemory(this)">
+        <div class="memoryInner">
+          <div class="memoryFace">🔒<br>MEMORY 02</div>
+          <div class="memoryFace memoryBack">
+            Annoying each other professionally.
+          </div>
+        </div>
+      </div>
+
+      <div class="memory" onclick="flipMemory(this)">
+        <div class="memoryInner">
+          <div class="memoryFace">🔒<br>MEMORY 03</div>
+          <div class="memoryFace memoryBack">
+            Laughing at completely random things.
+          </div>
+        </div>
+      </div>
+
+      <div class="memory" onclick="flipMemory(this)">
+        <div class="memoryInner">
+          <div class="memoryFace">🔒<br>MEMORY 04</div>
+          <div class="memoryFace memoryBack">
+            The moments that don't need a photograph.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+
+    <div class="centerText">
+      <button class="btn hidden" id="memoryNext" onclick="completeMission(8);go(11)">
+        UNLOCK STORY MAP →
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- SCREEN 11 -->
+
+<section class="screen" id="s11">
+  <div class="center">
+    <div class="kicker">MISSION 09</div>
+    <h1 class="sectionTitle">Friendship Story Map</h1>
+    <p class="sectionSub">Every friendship has chapters.</p>
+
+    <div class="glass map">
+
+      <div class="mapLine"></div>
+
+      <div class="nodes">
+
+        <div class="node" onclick="storyNode('First Conversation')">
+          <div class="nodeCircle">01</div>
+          <span>First Talk</span>
+        </div>
+
+        <div class="node" onclick="storyNode('Random Talks')">
+          <div class="nodeCircle">02</div>
+          <span>Random Talks</span>
+        </div>
+
+        <div class="node" onclick="storyNode('Annoying Moments')">
+          <div class="nodeCircle">03</div>
+          <span>Chaos</span>
+        </div>
+
+        <div class="node" onclick="storyNode('Good Memories')">
+          <div class="nodeCircle">04</div>
+          <span>Memories</span>
+        </div>
+
+        <div class="node" onclick="storyNode('The Challenge')">
+          <div class="nodeCircle">?</div>
+          <span>Challenge</span>
+        </div>
+
+        <div class="node" onclick="storyNode('Final')">
+          <div class="nodeCircle">∞</div>
+          <span>Final</span>
+        </div>
+
+      </div>
+
+      <div id="storyText" class="centerText" style="margin-top:40px;color:#bbb">
+        Tap a node.
+      </div>
+
+    </div>
+
+    <br>
+
+    <div class="centerText">
+      <button class="btn" onclick="completeMission(9);go(12)">
+        CONTINUE →
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- SCREEN 12 -->
+
+<section class="screen" id="s12">
+  <div class="center">
+    <div class="kicker">MISSION 10</div>
+    <h1 class="sectionTitle">The Chat Archive</h1>
+    <p class="sectionSub">Recovered conversation fragment.</p>
+
+    <div class="glass chat">
+
+      <div class="msg vijay">
+        <small>VIJAY</small>
+        I made something for you.
+      </div>
+
+      <div class="msg tripti">
+        <small>TRIPTI</small>
+        What?
+      </div>
+
+      <div class="msg vijay">
+        <small>VIJAY</small>
+        A surprise website.
+      </div>
+
+      <div class="msg tripti">
+        <small>TRIPTI</small>
+        Ye toh simple hota hai koi bhi bana leta.
+      </div>
+
+      <div class="msg vijay">
+        <small>VIJAY</small>
+        Oh really?
+      </div>
+
+      <div class="msg tripti">
+        <small>TRIPTI</small>
+        Haan 😌
+      </div>
+
+      <div class="msg vijay">
+        <small>VIJAY</small>
+        Challenge accepted.
+      </div>
+
+    </div>
+
+    <br>
+
+    <div class="centerText">
+      <button class="btn" onclick="completeMission(10);go(13)">
+        SEE WHAT HAPPENS NEXT →
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- SCREEN 13 -->
+
+<section class="screen" id="s13">
+  <div class="center">
+    <div class="kicker">ACHIEVEMENT ROOM</div>
+    <h1 class="sectionTitle">You Survived.</h1>
+    <p class="sectionSub">Let's see what you unlocked.</p>
+
+    <div class="grid grid2" id="achievements"></div>
+
+    <br>
+
+    <div class="centerText">
+      <button class="btn" onclick="showEasterEggs()">
+        SEARCH FOR SECRETS →
+      </button>
+    </div>
+
+    <div id="easterArea" class="hidden" style="margin-top:25px">
+      <div class="glass" style="padding:25px">
+        <h3>🥚 Easter Egg Log</h3>
+        <p style="color:#999;line-height:1.8;margin-top:10px">
+          • Type <b>TRIPTI</b> anywhere<br>
+          • Click the TRIPTI OS HUD<br>
+          • Click the infinity symbol<br>
+          • Click the screen title 3 times<br>
+          • Try the Konami code: ↑ ↑ ↓ ↓ ← → ← →
+        </p>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="centerText">
+      <button class="btn" onclick="go(14)">
+        FINAL ACCESS →
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- SCREEN 14 -->
+
+<section class="screen" id="s14">
+  <div class="center final">
+
+    <div class="kicker">ACCESS LEVEL: COMPLETE</div>
+
+    <div class="glass" style="padding:50px 25px">
+
+      <p style="color:#999">You made it this far.</p>
+
+      <h1>
+        But the real surprise<br>
+        was never the website.
+      </h1>
+
+      <div class="finalQuote">
+        It was the effort behind it.<br><br>
+
+        You said:<br>
+        <b>“Ye toh simple hota hai, koi bhi bana lega.”</b><br><br>
+
+        So...<br>
+
+        <span style="color:#f9a8d4;font-size:22px">
+          Simple nahi banaya. 😎
+        </span>
+      </div>
+
+      <div class="avatar">TG</div>
+
+      <h2 style="font-size:35px;margin:20px 0">
+        TRIPTI GUPTA 💙
+      </h2>
+
+      <p style="color:#aaa;max-width:600px;margin:auto;line-height:1.8">
+        Some people don't need a photo to be remembered.
+        Some friendships don't need a perfect explanation.
+        And some surprises are simply made because
+        someone deserves a reason to smile.
+      </p>
+
+      <br>
+
+      <div class="infinity">∞</div>
+
+      <h3 style="letter-spacing:.2em">
+        CHALLENGE ACCEPTED.
+      </h3>
+
+      <br>
+
+      <button class="btn" onclick="celebrate()">
+        REPLAY THE CHAOS ✨
+      </button>
+
+    </div>
+
+    <div class="footer">
+      TRIPTI OS v∞ • Built with effort, chaos & friendship
+    </div>
+
+  </div>
+</section>
+
+
+<div id="toast"></div>
 
 
 <script>
 
-/* ==========================================
-   TRIPTI SURPRISE EXPERIENCE
-   Single-file / No libraries
-   ========================================== */
+/* =========================
+   STATE
+========================= */
+
+const state = {
+  mission: Number(localStorage.getItem("triptiMission") || 0),
+  score: Number(localStorage.getItem("triptiScore") || 0),
+  secrets: Number(localStorage.getItem("triptiSecrets") || 0),
+  sound:false,
+  clues:0,
+  memories:0,
+  doors:false,
+  heartGame:false
+};
+
+const achievements = [
+  ["🔎","Curious One","Started the experience.",true],
+  ["🧩","Clue Hunter","Found all three clues",false],
+  ["🚪","Door Explorer","Chose a mysterious door",false],
+  ["🏃","Escape Artist","Attempted to escape.",false],
+  ["💻","Code Breaker","Unlocked secret access.",false],
+  ["📷","No-Photo Survivor","Survived without a photo.",false],
+  ["❤️","Heart Collector","Caught 10 hearts.",false],
+  ["🧠","Memory Keeper","Opened the memory vault.",false],
+  ["🗺️","Story Explorer","Explored the friendship map.",false],
+  ["🏆","Final Survivor","Completed every mission.",false]
+];
 
 
-/* ---------- STAR FIELD ---------- */
+/* =========================
+   SCREEN NAVIGATION
+========================= */
 
-for(let i=0;i<130;i++){
+function go(n){
 
-  const star=document.createElement("div");
+  document.querySelectorAll(".screen")
+    .forEach(s=>s.classList.remove("active"));
 
-  star.className="star";
+  const target=document.getElementById("s"+n);
 
-  star.style.left=Math.random()*100+"vw";
-  star.style.top=Math.random()*100+"vh";
-  star.style.animationDelay=Math.random()*4+"s";
-  star.style.transform=`scale(${.5+Math.random()*1.8})`;
+  if(target) target.classList.add("active");
 
-  document.getElementById("stars").appendChild(star);
-}
-
-
-/* ---------- NAVIGATION ---------- */
-
-function go(number){
-
-  document.querySelectorAll(".screen").forEach(s=>{
-    s.classList.remove("active");
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
   });
 
-  const target=document.getElementById("s"+number);
-
-  if(target){
-    target.classList.add("active");
-    window.scrollTo({top:0,behavior:"smooth"});
+  if(n>=2){
+    document.getElementById("hud").classList.remove("hidden");
   }
 
-  if(number===2) startTerminal();
-  if(number===6) startAlgorithm();
+  updateHUD();
+
+  if(n===13){
+    renderAchievements();
+  }
+
+  if(n===14){
+    setTimeout(celebrate,400);
+  }
 }
 
 
-/* ---------- TERMINAL ---------- */
+/* =========================
+   START
+========================= */
 
-let terminalStarted=false;
+function startExperience(){
 
-function startTerminal(){
+  beep(500,100);
 
-  if(terminalStarted) return;
+  state.score+=50;
 
-  terminalStarted=true;
+  save();
+
+  go(2);
+
+  runTerminal();
+}
+
+function runTerminal(){
+
+  const terminal=document.getElementById("terminal");
+
+  terminal.innerHTML="";
 
   const lines=[
-    "> booting TRIPTI_SYSTEM...",
-    "> checking identity...",
-    "> identity found: TRIPTI GUPTA",
-    "> checking photo dependency...",
-    "> photo dependency: NOT REQUIRED",
-    "> detecting challenge...",
-    "> challenge detected.",
-    "> difficulty increased...",
-    "> loading surprise...",
-    "> status: READY"
+    ["BOOTING TRIPTI OS...","green"],
+    ["Loading friendship protocol...","cyan"],
+    ["Searching subject database...","purple"],
+    ["Identity found: TRIPTI GUPTA","green"],
+    ["Photo dependency: NOT REQUIRED","green"],
+    ["Previous website detected...","cyan"],
+    ["Complexity level: TOO SIMPLE","red"],
+    ["Challenge detected.","pink"],
+    ["Developer response: ACCEPTED.","green"],
+    ["Activating PRO MAX MODE...","green"],
+    ["10 missions loaded.","cyan"],
+    ["Good luck, Tripti.","purple"]
   ];
-
-  const box=document.getElementById("terminalText");
 
   let i=0;
 
-  function nextLine(){
+  function next(){
 
     if(i>=lines.length){
 
-      document.getElementById("terminalBtn").style.display="inline-block";
+      document
+        .getElementById("terminalNext")
+        .classList.remove("hidden");
+
+      completeAchievement(0);
 
       return;
     }
 
+    const [txt,cls]=lines[i++];
+
     const line=document.createElement("div");
 
-    line.textContent=lines[i];
+    line.className="termLine "+cls;
 
-    box.insertBefore(
-      line,
-      box.querySelector(".cursor")
-    );
+    line.textContent="> "+txt;
 
-    i++;
+    terminal.appendChild(line);
 
-    setTimeout(nextLine,350);
+    beep(250+i*30,40);
+
+    setTimeout(next,380);
   }
 
-  setTimeout(nextLine,500);
+  next();
 }
 
 
-/* ---------- CLUES ---------- */
+/* =========================
+   CLUES
+========================= */
 
-let cluesOpened=0;
+function openClue(el,n){
 
-function openClue(element){
+  if(!el.classList.contains("open")){
 
-  if(element.classList.contains("open")) return;
+    el.classList.add("open");
 
-  element.classList.add("open");
-  cluesOpened++;
+    state.clues++;
 
-}
+    state.score+=20;
 
+    if(state.clues>=3){
 
-/* ---------- DOORS ---------- */
+      document
+        .getElementById("clueNext")
+        .classList.remove("hidden");
 
-function door(number){
-
-  const message=document.getElementById("doorMessage");
-
-  const data={
-
-    1:{
-      title:"🌸 Door 01",
-      text:"A little reminder: good people deserve random reasons to smile. 💙"
-    },
-
-    2:{
-      title:"😂 Door 02",
-      text:"Congratulations. You found absolutely nothing useful. You just got pranked. 😂"
-    },
-
-    3:{
-      title:"🔐 Door 03",
-      text:"You found the hidden route. And yes... this is where things get interesting."
+      completeAchievement(1);
     }
 
-  };
-
-  message.style.display="block";
-
-  message.innerHTML=
-  `<h3>${data[number].title}</h3><p>${data[number].text}</p>`;
-
-  document.getElementById("doorNext").style.display="inline-block";
-
+    save();
+    updateHUD();
+    beep(650,70);
+  }
 }
 
 
-/* ---------- MOVING BUTTON ---------- */
+/* =========================
+   DOORS
+========================= */
+
+function door(n){
+
+  const result=document.getElementById("doorResult");
+
+  const messages=[
+    "The sweet door opened... but threw glitter at the system.",
+    "The weird door opened. The system immediately regrets this decision.",
+    "The hidden door opened. Obviously you chose the suspicious one."
+  ];
+
+  result.innerHTML=messages[n-1];
+
+  document
+    .getElementById("doorNext")
+    .classList.remove("hidden");
+
+  state.doors=true;
+
+  state.score+=50;
+
+  completeAchievement(2);
+
+  save();
+
+  beep(700,100);
+}
+
+
+/* =========================
+   ESCAPE BUTTON
+========================= */
 
 const escapeBtn=document.getElementById("escapeBtn");
-const prankZone=document.getElementById("prankZone");
 
-let escapeAttempts=0;
+escapeBtn.addEventListener("mouseenter",moveEscape);
 
-function moveEscapeButton(){
+escapeBtn.addEventListener("touchstart",moveEscape);
 
-  escapeAttempts++;
+function moveEscape(){
 
-  const zoneWidth=prankZone.clientWidth;
-  const zoneHeight=prankZone.clientHeight;
+  const x=Math.random()*220-110;
+  const y=Math.random()*80-40;
 
-  const x=50+Math.random()*40-20;
-  const y=50+Math.random()*55-27;
+  escapeBtn.style.transform=`translate(${x}px,${y}px)`;
 
-  escapeBtn.style.left=x+"%";
-  escapeBtn.style.top=y+"%";
-  escapeBtn.style.transform="translate(-50%,-50%)";
+  document.getElementById("escapeText").textContent=
+    "Nice try. The button has trust issues. 😂";
 
-  if(escapeAttempts===1){
-    showToast("Nice try, Tripti. 😂");
-  }
+  state.score+=10;
 
-  if(escapeAttempts===3){
-    escapeBtn.innerText="Okay... TRY AGAIN 😭";
-  }
+  completeAchievement(3);
 
-  if(escapeAttempts>=6){
-    escapeBtn.innerText="I GIVE UP 😂";
-    escapeBtn.onclick=()=>{
-      showToast("Escape system disabled. 😌");
-    };
+  save();
+}
+
+function stayHere(){
+
+  document.getElementById("escapeText").textContent=
+    "Correct answer. The system approves. 😎";
+
+  state.score+=50;
+
+  completeMission(3);
+
+  save();
+
+  setTimeout(()=>go(6),700);
+}
+
+
+/* =========================
+   MISSIONS
+========================= */
+
+function completeMission(n){
+
+  if(n>state.mission){
+
+    state.mission=n;
+
+    state.score+=100;
+
+    save();
+
+    updateHUD();
+
+    toast("MISSION "+n+" COMPLETE ✓");
+
   }
 }
 
-escapeBtn.addEventListener("mouseenter",moveEscapeButton);
+function completeAchievement(index){
 
-escapeBtn.addEventListener("touchstart",function(e){
-  e.preventDefault();
-  moveEscapeButton();
-});
+  const key="achievement_"+index;
+
+  if(!localStorage.getItem(key)){
+
+    localStorage.setItem(key,"1");
+
+    state.score+=75;
+
+    save();
+
+    toast("ACHIEVEMENT UNLOCKED: "+achievements[index][1]);
+  }
+}
 
 
-/* ---------- FRIENDSHIP ALGORITHM ---------- */
+/* =========================
+   CODE PUZZLE
+========================= */
 
-let algorithmStarted=false;
+function checkCode(){
 
-function startAlgorithm(){
+  const input=document
+    .getElementById("codeInput")
+    .value
+    .trim()
+    .toUpperCase();
 
-  if(algorithmStarted) return;
+  const msg=document.getElementById("codeMessage");
 
-  algorithmStarted=true;
-
-  const box=document.getElementById("algorithm");
-
-  const lines=[
-    "[BOOT] Friendship.exe starting...",
-    "[SCAN] Checking random conversations...",
-    "[SCAN] Measuring laughter frequency...",
-    "[SCAN] Detecting annoying moments...",
-    "[SCAN] Detecting trust...",
-    "[SCAN] Detecting memories...",
-    "[CALC] Friendship score = ???",
-    "[ERROR] Number exceeds calculator limit.",
-    "[RETRY] Using advanced friendship algorithm...",
-    "[SUCCESS] Result generated."
+  const valid=[
+    "TRIPTI",
+    "TRIPTIGUPTA",
+    "TG",
+    "CHALLENGE",
+    "TRIPTI2026"
   ];
 
-  lines.forEach((text,index)=>{
+  if(valid.includes(input)){
 
-    setTimeout(()=>{
+    msg.innerHTML=
+      '<span class="green">ACCESS GRANTED ✓</span>';
 
-      const line=document.createElement("div");
+    state.score+=150;
 
-      line.className="line";
+    completeAchievement(4);
 
-      line.textContent=text;
+    document
+      .getElementById("codeNext")
+      .classList.remove("hidden");
 
-      box.appendChild(line);
+    save();
 
-      if(index===lines.length-1){
+    beep(900,180);
 
-        setTimeout(()=>{
+  }else{
 
-          document
-          .getElementById("algorithmResult")
-          .classList.remove("hidden");
+    msg.textContent=
+      "ACCESS DENIED. Hint: her name.";
 
-          document
-          .getElementById("algoNext")
-          .style.display="inline-block";
+    beep(180,100);
+  }
+}
 
-        },700);
+function showHint(){
 
+  document.getElementById("codeMessage").textContent=
+    "Hint: TRIPTI knows the answer.";
+}
+
+
+/* =========================
+   HEART GAME
+========================= */
+
+let heartTimer;
+let heartSpawner;
+let heartScore=0;
+let heartTime=20;
+
+function startHeartGame(){
+
+  heartScore=0;
+  heartTime=20;
+
+  document.getElementById("heartScore").textContent=0;
+  document.getElementById("heartTime").textContent=20;
+
+  document.getElementById("gameResult").textContent="";
+
+  document
+    .getElementById("gameStart")
+    .classList.add("hidden");
+
+  const arena=document.getElementById("heartGame");
+
+  arena.innerHTML="";
+
+  clearInterval(heartTimer);
+  clearInterval(heartSpawner);
+
+  heartSpawner=setInterval(()=>{
+
+    if(heartScore>=10) return;
+
+    const heart=document.createElement("div");
+
+    heart.className="heart";
+
+    heart.textContent=["💙","💜","💖","💗","✨"][
+      Math.floor(Math.random()*5)
+    ];
+
+    heart.style.left=Math.random()*90+"%";
+
+    heart.style.bottom="-20px";
+
+    heart.onclick=function(){
+
+      heartScore++;
+
+      state.score+=25;
+
+      document.getElementById("heartScore")
+        .textContent=heartScore;
+
+      heart.remove();
+
+      beep(600+heartScore*30,50);
+
+      if(heartScore>=10){
+
+        endHeartGame(true);
       }
+    };
 
-    },index*500);
-
-  });
-
-}
-
-
-/* ---------- EASTER EGG ---------- */
-
-function activateEaster(){
-
-  document.getElementById("eggStatus").textContent="UNLOCKED 🔓";
-
-  document
-  .getElementById("eggMessage")
-  .classList.remove("hidden");
-
-  document
-  .getElementById("eggNext")
-  .style.display="inline-block";
-
-  showToast("🥚 Secret discovered!");
-}
-
-
-/* ---------- CONFETTI ---------- */
-
-function celebrate(){
-
-  const emojis=[
-    "💙","💖","✨","🎉","🌸",
-    "💫","🥳","⭐","😂"
-  ];
-
-  for(let i=0;i<110;i++){
-
-    const item=document.createElement("div");
-
-    item.className="confetti";
-
-    item.textContent=
-    emojis[Math.floor(Math.random()*emojis.length)];
-
-    item.style.left=Math.random()*100+"vw";
-
-    item.style.fontSize=
-    (12+Math.random()*22)+"px";
-
-    item.style.animationDuration=
-    (2+Math.random()*3)+"s";
-
-    document.body.appendChild(item);
+    arena.appendChild(heart);
 
     setTimeout(()=>{
-      item.remove();
-    },5500);
+      if(heart.isConnected) heart.remove();
+    },3000);
 
+  },500);
+
+  heartTimer=setInterval(()=>{
+
+    heartTime--;
+
+    document.getElementById("heartTime")
+      .textContent=heartTime;
+
+    if(heartTime<=0){
+
+      endHeartGame(heartScore>=10);
+    }
+
+  },1000);
+}
+
+function endHeartGame(success){
+
+  clearInterval(heartTimer);
+  clearInterval(heartSpawner);
+
+  document
+    .querySelectorAll(".heart")
+    .forEach(x=>x.remove());
+
+  if(success){
+
+    document.getElementById("gameResult").innerHTML=
+      '<span class="green">10 HEARTS COLLECTED! ❤️</span>';
+
+    document
+      .getElementById("gameNext")
+      .classList.remove("hidden");
+
+    completeAchievement(6);
+
+  }else{
+
+    document.getElementById("gameResult").textContent=
+      "Time's up! Try again. 😎";
+
+    document
+      .getElementById("gameStart")
+      .classList.remove("hidden");
   }
 
-  showToast("🎉 Surprise successfully delivered!");
+  save();
 }
 
 
-/* ---------- TOAST ---------- */
+/* =========================
+   MEMORY
+========================= */
 
-function showToast(message){
+function flipMemory(el){
 
-  const toast=document.getElementById("toast");
+  if(!el.classList.contains("flipped")){
 
-  toast.textContent=message;
+    el.classList.add("flipped");
 
-  toast.classList.add("show");
+    state.memories++;
 
-  setTimeout(()=>{
-    toast.classList.remove("show");
-  },2500);
+    state.score+=25;
 
+    if(state.memories>=4){
+
+      document
+        .getElementById("memoryNext")
+        .classList.remove("hidden");
+
+      completeAchievement(7);
+    }
+
+    save();
+
+    beep(500,80);
+  }
 }
 
 
-/* ---------- KEYBOARD EASTER EGG ---------- */
+/* =========================
+   STORY MAP
+========================= */
+
+function storyNode(title){
+
+  const messages={
+    "First Conversation":
+      "Every friendship starts somewhere. Usually with something completely random.",
+    "Random Talks":
+      "Then random conversations become normal conversations.",
+    "Annoying Moments":
+      "And obviously... annoying each other becomes a full-time job.",
+    "Good Memories":
+      "The best memories are often the ones that weren't planned.",
+    "The Challenge":
+      "Someone said the website was simple. A developer took that personally.",
+    "Final":
+      "And somehow the story reaches here."
+  };
+
+  document.getElementById("storyText").textContent=
+    messages[title];
+
+  state.score+=15;
+
+  completeAchievement(8);
+
+  save();
+}
+
+
+/* =========================
+   ACHIEVEMENTS
+========================= */
+
+function renderAchievements(){
+
+  const container=document.getElementById("achievements");
+
+  container.innerHTML="";
+
+  achievements.forEach((a,i)=>{
+
+    const unlocked=
+      a[3] ||
+      localStorage.getItem("achievement_"+i);
+
+    const div=document.createElement("div");
+
+    div.className=
+      "card achievement "+
+      (unlocked?"":"locked");
+
+    div.innerHTML=`
+      <div class="badge">${a[0]}</div>
+      <div>
+        <h3>${a[1]}</h3>
+        <p>${a[2]}</p>
+      </div>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+function showEasterEggs(){
+
+  document
+    .getElementById("easterArea")
+    .classList.remove("hidden");
+
+  addSecret();
+
+  beep(800,120);
+}
+
+
+/* =========================
+   EASTER EGGS
+========================= */
 
 let typed="";
 
 document.addEventListener("keydown",e=>{
 
-  typed+=e.key.toLowerCase();
+  typed+=e.key.toUpperCase();
 
-  if(typed.length>20){
-    typed=typed.slice(-20);
+  if(typed.length>30){
+    typed=typed.slice(-30);
   }
 
-  if(typed.includes("tripti")){
+  if(typed.includes("TRIPTI")){
 
-    showToast("👀 Secret keyboard Easter egg activated!");
+    addSecret();
+
+    toast("SECRET FOUND: TRIPTI MODE 💜");
 
     typed="";
-
   }
+});
+
+let clickCount=0;
+
+document.querySelectorAll(".sectionTitle").forEach(el=>{
+
+  el.addEventListener("click",()=>{
+
+    clickCount++;
+
+    if(clickCount>=3){
+
+      addSecret();
+
+      toast("3-CLICK SECRET FOUND 🥚");
+
+      clickCount=0;
+    }
+  });
+});
+
+document.querySelector(".infinity").addEventListener("click",()=>{
+
+  addSecret();
+
+  toast("INFINITY SECRET FOUND ∞");
 
 });
+
+document.getElementById("hud").addEventListener("click",()=>{
+
+  addSecret();
+
+  toast("HUD SECRET FOUND 🕵️");
+
+});
+
+
+let konami=[];
+
+const konamiCode=[
+  "ARROWUP",
+  "ARROWUP",
+  "ARROWDOWN",
+  "ARROWDOWN",
+  "ARROWLEFT",
+  "ARROWRIGHT",
+  "ARROWLEFT",
+  "ARROWRIGHT"
+];
+
+document.addEventListener("keydown",e=>{
+
+  konami.push(e.code);
+
+  if(konami.length>8){
+    konami.shift();
+  }
+
+  if(JSON.stringify(konami)===JSON.stringify(konamiCode)){
+
+    addSecret();
+
+    toast("KONAMI SECRET UNLOCKED 🚀");
+
+    celebrate();
+
+    konami=[];
+  }
+});
+
+function addSecret(){
+
+  if(state.secrets<5){
+
+    state.secrets++;
+
+    state.score+=100;
+
+    save();
+
+    updateHUD();
+  }
+}
+
+
+/* =========================
+   HUD
+========================= */
+
+function updateHUD(){
+
+  document.getElementById("hudMission")
+    .textContent=Math.min(state.mission,10)+"/10";
+
+  document.getElementById("hudSecret")
+    .textContent=Math.min(state.secrets,5)+"/5";
+
+  document.getElementById("hudScore")
+    .textContent=String(state.score).padStart(3,"0");
+
+  const access=Math.min(
+    100,
+    Math.round(
+      state.mission*9+
+      state.secrets*2+
+      (state.score/1000)*3
+    )
+  );
+
+  document.getElementById("hudAccess")
+    .textContent=access+"%";
+}
+
+
+/* =========================
+   SAVE
+========================= */
+
+function save(){
+
+  localStorage.setItem(
+    "triptiMission",
+    state.mission
+  );
+
+  localStorage.setItem(
+    "triptiScore",
+    state.score
+  );
+
+  localStorage.setItem(
+    "triptiSecrets",
+    state.secrets
+  );
+
+  updateHUD();
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimer;
+
+function toast(text){
+
+  const el=document.getElementById("toast");
+
+  el.textContent=text;
+
+  el.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer=setTimeout(()=>{
+    el.classList.remove("show");
+  },2300);
+}
+
+
+/* =========================
+   SOUND ENGINE
+========================= */
+
+let audioCtx;
+
+function beep(freq=500,duration=80){
+
+  if(!state.sound) return;
+
+  if(!audioCtx){
+
+    audioCtx=
+      new (window.AudioContext||
+      window.webkitAudioContext)();
+  }
+
+  const osc=audioCtx.createOscillator();
+
+  const gain=audioCtx.createGain();
+
+  osc.frequency.value=freq;
+
+  osc.type="sine";
+
+  gain.gain.value=.035;
+
+  osc.connect(gain);
+
+  gain.connect(audioCtx.destination);
+
+  osc.start();
+
+  setTimeout(()=>{
+    osc.stop();
+  },duration);
+}
+
+function toggleSound(){
+
+  state.sound=!state.sound;
+
+  document.getElementById("soundBtn")
+    .textContent=state.sound?"🔊":"🔇";
+
+  if(state.sound){
+
+    if(!audioCtx){
+
+      audioCtx=
+        new (window.AudioContext||
+        window.webkitAudioContext)();
+    }
+
+    beep(700,100);
+
+    toast("Sound effects enabled 🔊");
+
+  }else{
+
+    toast("Sound effects muted 🔇");
+  }
+}
+
+
+/* =========================
+   THEME
+========================= */
+
+let light=false;
+
+function toggleTheme(){
+
+  light=!light;
+
+  if(light){
+
+    document.body.style.background=
+      "radial-gradient(circle at 20% 20%,rgba(139,92,246,.12),transparent 30%),#eef0f7";
+
+    document.body.style.color="#111";
+
+    toast("Day mode activated ☀️");
+
+  }else{
+
+    document.body.style.background=
+      "radial-gradient(circle at 20% 20%,rgba(139,92,246,.13),transparent 30%),radial-gradient(circle at 80% 70%,rgba(236,72,153,.10),transparent 30%),#050509";
+
+    document.body.style.color="#f7f7fb";
+
+    toast("Night mode activated 🌙");
+  }
+}
+
+
+/* =========================
+   CELEBRATION
+========================= */
+
+function celebrate(){
+
+  for(let i=0;i<90;i++){
+
+    const e=document.createElement("div");
+
+    e.textContent=
+      ["💙","💜","💖","✨","🎉"][Math.floor(Math.random()*5)];
+
+    e.style.position="fixed";
+    e.style.left=Math.random()*100+"vw";
+    e.style.top="-30px";
+    e.style.fontSize=(15+Math.random()*25)+"px";
+    e.style.zIndex="999";
+    e.style.pointerEvents="none";
+
+    document.body.appendChild(e);
+
+    const duration=1500+Math.random()*2500;
+
+    e.animate(
+      [
+        {
+          transform:"translateY(0) rotate(0)",
+          opacity:1
+        },
+        {
+          transform:
+            `translateY(${100+Math.random()*110}vh) rotate(${360+Math.random()*720}deg)`,
+          opacity:0
+        }
+      ],
+      {
+        duration,
+        easing:"cubic-bezier(.2,.8,.2,1)"
+      }
+    );
+
+    setTimeout(()=>e.remove(),duration);
+  }
+
+  beep(900,150);
+}
+
+
+/* =========================
+   BACKGROUND STARS
+========================= */
+
+const canvas=document.getElementById("space");
+
+const ctx=canvas.getContext("2d");
+
+let stars=[];
+
+function resizeCanvas(){
+
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+
+  stars=[];
+
+  for(let i=0;i<160;i++){
+
+    stars.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      r:Math.random()*1.5,
+      s:.1+Math.random()*.35
+    });
+  }
+}
+
+function animateStars(){
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  for(const s of stars){
+
+    s.y+=s.s;
+
+    if(s.y>canvas.height){
+      s.y=0;
+      s.x=Math.random()*canvas.width;
+    }
+
+    ctx.beginPath();
+
+    ctx.arc(
+      s.x,
+      s.y,
+      s.r,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fillStyle=
+      "rgba(255,255,255,"+
+      (.25+Math.random()*.5)+")";
+
+    ctx.fill();
+  }
+
+  requestAnimationFrame(animateStars);
+}
+
+window.addEventListener("resize",resizeCanvas);
+
+resizeCanvas();
+
+animateStars();
+
+
+/* =========================
+   INTRO TYPING
+========================= */
+
+const introLines=[
+  "Connecting to private network...",
+  "Finding something worth remembering...",
+  "Checking complexity...",
+  "ERROR: TOO SIMPLE.",
+  "Solution: Make it PRO MAX."
+];
+
+let introIndex=0;
+
+function introTyping(){
+
+  if(introIndex>=introLines.length) return;
+
+  document.getElementById("introType")
+    .textContent= "> "+introLines[introIndex++];
+
+  setTimeout(introTyping,1200);
+}
+
+introTyping();
+
+
+/* =========================
+   FINALIZATION
+========================= */
+
+updateHUD();
 
 </script>
 
